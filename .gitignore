@@ -1,0 +1,5 @@
+/backend/env
+/backend/timesheets/hours/migrations
+/frontend/node_modules
+*pyc
+db.sqlite3
