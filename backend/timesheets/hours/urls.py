@@ -5,7 +5,7 @@ from hours import views
 
 urlpatterns = [
     path('hours/', views.HourList.as_view()),
-    path('hours/<int:pk/', views.HourDetail.as_view()),
+    path('hours/<int:pk>/', views.HourDetail.as_view()),
     path('auth/', authviews.obtain_auth_token),
 ]
 

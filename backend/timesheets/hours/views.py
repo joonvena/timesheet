@@ -9,6 +9,7 @@ from rest_framework.authentication import TokenAuthentication
 from rest_framework import generics
 from rest_framework import permissions
 
+
 class HourList(generics.ListCreateAPIView):
     authentication_classes = [TokenAuthentication]
     permission_classes = [IsOwner]
@@ -20,10 +21,17 @@ class HourList(generics.ListCreateAPIView):
 
     def get_queryset(self):
         week_num = self.request.query_params.get('weeknum', None)
-        owner_queryset = self.queryset.filter(owner=self.request.user, week=week_num)
+        owner_queryset = self.queryset.filter(
+            owner=self.request.user, week=week_num)
         return owner_queryset
 
+
 class HourDetail(generics.RetrieveUpdateDestroyAPIView):
+    authentication_classes = [TokenAuthentication]
+    permissions_classes = [IsOwner]
     queryset = Hour.objects.all()
     serializer_class = HourSerializer
 
+    def get_queryset(self):
+        owner_queryset = self.queryset.filter(owner=self.request.user)
+        return owner_queryset
